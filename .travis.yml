@@ -1,19 +1,31 @@
-language: java
-sudo: false
-
-jdk:
-  - oraclejdk8
-
 after_success:
-  - chmod -R 777 ./travis/after_success.sh
-  - ./travis/after_success.sh
-
+- chmod -R 777 ./travis/after_success.sh
+- ./travis/after_success.sh
+before_install:
+- wget https://dl.dropboxusercontent.com/u/7897865/apache-maven-3.3.9.zip
+- unzip -qq apache-maven-3.3.9.zip
+- export M2_HOME=$PWD/apache-maven-3.3.9
+- export PATH=$M2_HOME/bin:$PATH
 env:
   global:
-    - secure: "dPX83x9q53WLJjNEsOJZTj2yjcusMp3Rg2SeF9xGUgxLa0NAdiWKM/ejSiJO\nzRM+5nmnQGb4SSigqb99N0ndB0S5YhMzbpACD8+SmCfpYRPdUQtE5dW22xpd\nPGPPUwPAGcqISwq5lcFCbPeve8k4g5Co/ZWGMMkoYy8DfjRss6g="
-    - secure: "X/+tqgmKqR6wIvSLzDyYAc3Q0NtzFjnQZT7b4yD9MI+/9S1bLFyZJ8mLhymK\nEakyrz8syFAl38ebl2pGox3yaJ9GRfcQXjJ2Qv0Pgb0r+RQTrtU2Fpvb+3Nr\nh5ymtRIkU0XOpOBCq5M9AxV1TESftw3p1IUD9dzPilRqQdXzTGs="
-before_install:
-  - wget https://dl.dropboxusercontent.com/u/7897865/apache-maven-3.3.9.zip
-  - unzip -qq apache-maven-3.3.9.zip
-  - export M2_HOME=$PWD/apache-maven-3.3.9
-  - export PATH=$M2_HOME/bin:$PATH
+  - secure: 'dPX83x9q53WLJjNEsOJZTj2yjcusMp3Rg2SeF9xGUgxLa0NAdiWKM/ejSiJO
+
+      zRM+5nmnQGb4SSigqb99N0ndB0S5YhMzbpACD8+SmCfpYRPdUQtE5dW22xpd
+
+      PGPPUwPAGcqISwq5lcFCbPeve8k4g5Co/ZWGMMkoYy8DfjRss6g='
+  - secure: 'X/+tqgmKqR6wIvSLzDyYAc3Q0NtzFjnQZT7b4yD9MI+/9S1bLFyZJ8mLhymK
+
+      Eakyrz8syFAl38ebl2pGox3yaJ9GRfcQXjJ2Qv0Pgb0r+RQTrtU2Fpvb+3Nr
+
+      h5ymtRIkU0XOpOBCq5M9AxV1TESftw3p1IUD9dzPilRqQdXzTGs='
+jdk:
+- oraclejdk8
+language: java
+notifications:
+  email: false
+  slack:
+    rooms: flakycov:U2MeVOPjdi4up1U793ubeIUZ
+    template:
+    - Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository}@%{branch} by %{author} %{result} in %{duration}
+    - 'dashbot: %{repository_name} %{build_id}'
+sudo: false
