@@ -1,3 +1,10 @@
+language: java
+sudo: false
+
+jdk:
+  - oraclejdk8
+  - openjdk8
+
 after_success:
 - chmod -R 777 ./travis/after_success.sh
 - ./travis/after_success.sh
@@ -18,9 +25,6 @@ env:
       Eakyrz8syFAl38ebl2pGox3yaJ9GRfcQXjJ2Qv0Pgb0r+RQTrtU2Fpvb+3Nr
 
       h5ymtRIkU0XOpOBCq5M9AxV1TESftw3p1IUD9dzPilRqQdXzTGs='
-jdk:
-- oraclejdk8
-language: java
 notifications:
   email: false
   slack:
@@ -28,4 +32,3 @@ notifications:
     template:
     - Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository}@%{branch} by %{author} %{result} in %{duration}
     - 'dashbot: %{repository_name} %{build_id}'
-sudo: false
