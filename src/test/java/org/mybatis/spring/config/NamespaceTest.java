@@ -55,7 +55,7 @@ public final class NamespaceTest {
   }
 
   @AfterEach
-  public void assertNoMapperClass() {
+  void assertNoMapperClass() {
     // concrete classes should always be ignored by MapperScannerPostProcessor
     assertBeanNotLoaded("mapperClass");
 
@@ -64,11 +64,11 @@ public final class NamespaceTest {
     // assertBeanNotLoaded("annotatedMapperZeroMethods"); // as of 1.1.0 mappers
     // with no methods are loaded
 
-    applicationContext.destroy();
+    applicationContext.close();
   }
 
   @Test
-  public void testInterfaceScan() {
+  void testInterfaceScan() {
 
     applicationContext = new ClassPathXmlApplicationContext(new String[] { "org/mybatis/spring/config/base-package.xml" }, setupSqlSessionFactory());
 
@@ -82,7 +82,7 @@ public final class NamespaceTest {
   }
 
   @Test
-  public void testNameGenerator() {
+  void testNameGenerator() {
 
     applicationContext = new ClassPathXmlApplicationContext(new String[] { "org/mybatis/spring/config/name-generator.xml" }, setupSqlSessionFactory());
 
@@ -96,7 +96,7 @@ public final class NamespaceTest {
   }
 
   @Test
-  public void testMarkerInterfaceScan() {
+  void testMarkerInterfaceScan() {
 
     applicationContext = new ClassPathXmlApplicationContext(new String[] { "org/mybatis/spring/config/marker-interface.xml" }, setupSqlSessionFactory());
 
@@ -111,7 +111,7 @@ public final class NamespaceTest {
   }
 
   @Test
-  public void testAnnotationScan() {
+  void testAnnotationScan() {
 
     applicationContext = new ClassPathXmlApplicationContext(new String[] { "org/mybatis/spring/config/annotation.xml" }, setupSqlSessionFactory());
 
@@ -126,7 +126,7 @@ public final class NamespaceTest {
   }
 
   @Test
-  public void testMarkerInterfaceAndAnnotationScan() {
+  void testMarkerInterfaceAndAnnotationScan() {
 
     applicationContext = new ClassPathXmlApplicationContext(new String[] { "org/mybatis/spring/config/marker-and-annotation.xml" }, setupSqlSessionFactory());
 
@@ -141,7 +141,7 @@ public final class NamespaceTest {
   }
 
   @Test
-  public void testScanWithExplicitSqlSessionFactory() throws Exception {
+  void testScanWithExplicitSqlSessionFactory() throws Exception {
 
     applicationContext = new ClassPathXmlApplicationContext(new String[] { "org/mybatis/spring/config/factory-ref.xml" }, setupSqlSessionFactory());
 
@@ -155,7 +155,7 @@ public final class NamespaceTest {
   }
 
   @Test
-  public void testScanWithExplicitSqlSessionTemplate() throws Exception {
+  void testScanWithExplicitSqlSessionTemplate() throws Exception {
 
     applicationContext = new ClassPathXmlApplicationContext(new String[] { "org/mybatis/spring/config/factory-ref.xml" }, setupSqlSessionTemplate());
 
